@@ -64,8 +64,8 @@ export class MovieComponent implements OnInit, OnChanges{
 
   setFocus(){
     setTimeout(() => {
-      $("#movie-"+this.parentIndex+this.movie.movie_id).focus();
-    }, 1000);
+    $("#movie-"+this.parentIndex+this.movie.movie_id).focus();
+    }, 100);
   }
 
   removeFocus(){
@@ -75,8 +75,9 @@ export class MovieComponent implements OnInit, OnChanges{
   }
 
   shiftFocus($event,index){
+    
     let code=$event.keyCode || $event.which
-    if(this.parentIndex==0 && code==38) return
+    if((this.parentIndex==0 && code==38) || (this.parentIndex==13 && code==40)) return
     this.movie.active=false
     this.removeFocus()
     this.set_focus.emit({"id":this.movie.id, "index":index, "key":code})

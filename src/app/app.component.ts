@@ -102,7 +102,7 @@ export class AppComponent {
       "genre":"27",
     },
     {
-      "id":9,
+      "id":11,
       "section":"Comedy Gold",
       "description": "Have a laugh",
       "endpoint":"/discover/movie",
@@ -111,7 +111,7 @@ export class AppComponent {
       "genre":"35",
     },
     {
-      "id":10,
+      "id":12,
       "section":"Crime Shows",
       "description": "Release the detective in you",
       "endpoint":"/discover/tv",
@@ -120,7 +120,7 @@ export class AppComponent {
       "genre":"80",
     },
     {
-      "id":11,
+      "id":13,
       "section":"Documentaries",
       "description": "Always a good day to learn something new",
       "endpoint":"/discover/tv",
@@ -129,7 +129,7 @@ export class AppComponent {
       "genre":"99",
     },
     {
-      "id":12,
+      "id":14,
       "section":"Kids' Show",
       "description": "For the children in the house",
       "endpoint":"/discover/tv",
