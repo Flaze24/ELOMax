@@ -25,7 +25,7 @@ export class MovieCarouselComponent implements OnInit, OnChanges,AfterViewInit  
 
   private player : AnimationPlayer;
   private itemWidth : number;
-  timing = '250ms ease-in';
+  timing = '150ms ease-in';
 
 
   movies:any[]=[]
