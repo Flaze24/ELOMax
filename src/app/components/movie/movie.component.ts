@@ -76,6 +76,7 @@ export class MovieComponent implements OnInit, OnChanges{
 
   shiftFocus($event,index){
     let code=$event.keyCode || $event.which
+    if(this.parentIndex==0 && code==38) return
     this.movie.active=false
     this.removeFocus()
     this.set_focus.emit({"id":this.movie.id, "index":index, "key":code})

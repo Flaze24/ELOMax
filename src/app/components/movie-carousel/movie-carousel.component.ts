@@ -175,6 +175,7 @@ export class MovieCarouselComponent implements OnInit, OnChanges,AfterViewInit  
     if(code==37 || code==39){
       this.changeFocusMovies($event, code)
     }else{
+      if(this.rowIndex==0 && code==38) return
       this.changeFocusRow(code)
     }
 

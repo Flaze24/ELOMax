@@ -147,7 +147,7 @@ export class AppComponent {
     let  position = $("#row-"+this.activeRowIndex).offset().top;
     $("html, body").animate({
       scrollTop: position-40
-  }, 500);
+  }, 100);
     // $('body,html').animate({ scrollTop: $('body').height() }, 100);
 
   }
