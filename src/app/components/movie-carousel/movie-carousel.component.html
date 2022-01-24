@@ -1,0 +1,31 @@
+<div class="containerRow" id="row-{{rowIndex}}">
+
+    
+    <div class="section-title">
+        <div class="carousel-info">
+            {{row_info.section}} - <span class="sectionDescripcion">{{row_info.description}}</span>
+        </div>
+        
+        <div class="controls" *ngIf="movies.length>0" style="margin-top: 1em;">
+            <i (click)="prev()" class="left fas fa-angle-left" ></i>
+            <i (click)="next()" class="right fas fa-angle-right"></i>
+        </div>
+    </div>
+
+        <div class="movieRow" [ngStyle]="carouselWrapperStyle">
+            <ng-container *ngIf="activate_placeholder">
+                <div class="placeholderMovie" *ngFor="let box of [0,1,2,3,4,5,6,7,8,9]">
+                    <span class="imagePlaceholder"></span>
+                    <span class="titlePlaceholder"></span>
+                </div>
+            </ng-container>
+            <ul class="carousel-inner" *ngIf="!activate_placeholder" #carousel>
+                <li  *ngFor="let movie of movies; let movieIndex=index">
+                    <app-movie [activeIndex]="activeIndex" (set_focus)="changeFocus($event)" (set_inactive)="changeActive($event)" [parentIndex]="rowIndex" [index]="movieIndex" [movie]="movie"></app-movie>
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>

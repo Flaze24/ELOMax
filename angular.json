@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "elo-max"
+    }
+  },
+  "defaultProject": "elo-max",
+  "cli": {
+    "analytics": false
+  }
 }

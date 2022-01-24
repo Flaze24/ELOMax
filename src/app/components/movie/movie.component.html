@@ -1,0 +1,24 @@
+<div class="movieContainer" tabindex="{{index}}" (keydown)="shiftFocus($event,index)" id="movie-{{parentIndex}}{{movie.movie_id}}" [ngClass]="{'movieActiveContainer animated pulse':this.movie.active}" (mouseenter)="this.movie.active=true; changeActive()" (mouseleave)="this.movie.active=false; removeFocus()">
+    <ng-container>
+        <img src="https://image.tmdb.org/t/p/w500/{{movie.poster}}" class="moviePoster" alt = "{{movie.title}}"/>
+        <div class="movieInfo" >
+            <div class="movieTitle" >
+                {{movie.title}} 
+            </div>
+            <div class="movieDate" >
+               Release Date: {{movie.release_date | date:'MM/dd/yyy'}}
+            </div>
+            <div class="moviePopularity" *ngIf="this.movie.active">
+                Average Rating: {{movie.votes}}/10
+            </div>
+    
+            <div class="movieGenres" *ngIf="this.movie.active">
+                <div class="genre" *ngFor="let genre of genres">
+                    {{genre}}
+                </div>
+            </div>
+        </div>
+    </ng-container>
+    
+
+</div>
