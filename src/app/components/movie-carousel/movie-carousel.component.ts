@@ -33,6 +33,7 @@ export class MovieCarouselComponent implements OnInit, OnChanges,AfterViewInit  
   placeholder_movies=10
   activate_placeholder:boolean=true
   activeIndex=-1
+  currentIndex=-1
   oldIndex=0
   constructor(private movieService:MovieService,  private builder : AnimationBuilder) { }
   private currentSlide = 0;
@@ -40,6 +41,7 @@ export class MovieCarouselComponent implements OnInit, OnChanges,AfterViewInit  
 
   ngOnInit(): void {
     this.activeIndex=this.rowIndex==this.activeRow ? 0 : -1
+    this.currentIndex=this.activeIndex
     if(this.row_info.id<8){
       this.getInfoRow(this.row_info.endpoint)
     }else{
@@ -57,6 +59,7 @@ export class MovieCarouselComponent implements OnInit, OnChanges,AfterViewInit  
         if(this.movies.length>0){
           this.activeIndex=0
           this.activeIndex=this.oldIndex>0 ? this.oldIndex: 0
+          this.currentIndex=this.activeIndex
           this.movies[this.activeIndex].active=true
 
           // this.prev()
@@ -68,28 +71,35 @@ export class MovieCarouselComponent implements OnInit, OnChanges,AfterViewInit  
   }
 
   next() {
-    if( this.activeIndex + 1 === this.movies.length ){
-      this.activeIndex = 0;
+    if( this.currentIndex + 1 === this.movies.length ){
+      this.currentIndex = 0;
 
     }else{
-      this.activeIndex = (this.activeIndex + 1) % this.movies.length;
+      this.currentIndex = (this.currentIndex + 1) % this.movies.length;
 
     };
-    const offset = this.activeIndex * this.itemWidth;
-    this.oldIndex=this.activeIndex
+    const offset = this.currentIndex * this.itemWidth;
+    this.oldIndex=this.currentIndex
     const myAnimation : AnimationFactory = this.buildAnimation(offset);
     this.player = myAnimation.create(this.carousel.nativeElement);
     this.player.play();
+    setTimeout(() => {
+      this.simpleFocus(this.currentIndex)
+      }, 100);
+    
   }
 
   prev() {
-    this.activeIndex=this.activeIndex === 0 ? (this.movies.length-10) % this.movies.length: ((this.activeIndex - 1) + this.movies.length) % this.movies.length
-    console.log(this.activeIndex)
-    const offset = this.activeIndex * this.itemWidth;
-    this.oldIndex=this.activeIndex
+    this.currentIndex=this.currentIndex === 0 ? (this.movies.length-10) % this.movies.length: ((this.currentIndex - 1) + this.movies.length) % this.movies.length
+    console.log(this.currentIndex)
+    const offset = this.currentIndex * this.itemWidth;
+    this.oldIndex=this.currentIndex
     const myAnimation : AnimationFactory = this.buildAnimation(offset);
     this.player = myAnimation.create(this.carousel.nativeElement);
     this.player.play();
+    setTimeout(() => {
+      this.simpleFocus(this.currentIndex)
+      }, 100);
   }
 
   private buildAnimation( offset ) {
@@ -173,7 +183,13 @@ export class MovieCarouselComponent implements OnInit, OnChanges,AfterViewInit  
   changeFocus($event){
     let code=$event.key
     if(code==37 || code==39){
-      this.changeFocusMovies($event, code)
+      console.log($event)
+      if(code==39){
+        this.next()
+      }else{
+        this.prev()
+      }
+      // this.changeFocusMovies($event, code)
     }else{
       if((this.rowIndex==0 && code==38) || (this.rowIndex==13 && code==40)) return
       this.changeFocusRow(code)
@@ -186,12 +202,18 @@ export class MovieCarouselComponent implements OnInit, OnChanges,AfterViewInit  
     this.set_focus_row.emit({'index':this.rowIndex, 'code':code})
   }
 
+  simpleFocus(index){
+    this.movies[index].active=true
+    this.activeIndex=index
+  }
+
   changeFocusMovies($event,code){
     let id=code==39 ? $event.id+1 : $event.id-1
-    let index=$event.index
+    let index=code==39 ? $event.index+1 : $event.index-1
     let next_movie=this.movies.find(movie=> movie.id==id)
-    if(next_movie){
-      next_movie.active=true
+    if(index>=0 || index<=this.movies.length-1){
+      this.movies[index].active=true
+      console.log(this.movies[index])
       if(code==39){
         this.next()
       }else{

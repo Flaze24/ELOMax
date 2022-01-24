@@ -1,4 +1,4 @@
-<div class="movieContainer" tabindex="{{index}}" (keydown)="shiftFocus($event,index)" id="movie-{{parentIndex}}{{movie.movie_id}}" [ngClass]="{'movieActiveContainer animated pulse':this.movie.active}" (mouseenter)="this.movie.active=true; changeActive()" (mouseleave)="this.movie.active=false; removeFocus()">
+<div class="movieContainer" tabindex="{{index}}" (keydown)="shiftFocus($event,index)" (keyup)="sup()"  id="movie-{{parentIndex}}{{movie.movie_id}}" [ngClass]="{'movieActiveContainer animated pulse':this.movie.active}" (mouseenter)="this.movie.active=true; changeActive()" (mouseleave)="this.movie.active=false; removeFocus()">
     <ng-container>
         <img src="https://image.tmdb.org/t/p/w500/{{movie.poster}}" class="moviePoster" alt = "{{movie.title}}"/>
         <div class="movieInfo" >

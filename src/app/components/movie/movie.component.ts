@@ -60,6 +60,10 @@ export class MovieComponent implements OnInit, OnChanges{
     }, 100);
 
   }
+
+  sup(){
+    console.log("MOVE IT BITCH")
+  }
   
 
   setFocus(){
@@ -77,7 +81,7 @@ export class MovieComponent implements OnInit, OnChanges{
   shiftFocus($event,index){
     
     let code=$event.keyCode || $event.which
-    if((this.parentIndex==0 && code==38) || (this.parentIndex==13 && code==40)) return
+    if((this.parentIndex==0 && code==38) || (this.parentIndex==13 && code==40) || (index==0 &&code==37)) return
     this.movie.active=false
     this.removeFocus()
     this.set_focus.emit({"id":this.movie.id, "index":index, "key":code})
