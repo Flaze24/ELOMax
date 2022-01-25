@@ -61,9 +61,6 @@ export class MovieComponent implements OnInit, OnChanges{
 
   }
 
-  sup(){
-    console.log("MOVE IT BITCH")
-  }
   
 
   setFocus(){

@@ -91,7 +91,6 @@ export class MovieCarouselComponent implements OnInit, OnChanges,AfterViewInit  
 
   prev() {
     this.currentIndex=this.currentIndex === 0 ? (this.movies.length-10) % this.movies.length: ((this.currentIndex - 1) + this.movies.length) % this.movies.length
-    console.log(this.currentIndex)
     const offset = this.currentIndex * this.itemWidth;
     this.oldIndex=this.currentIndex
     const myAnimation : AnimationFactory = this.buildAnimation(offset);
@@ -183,7 +182,6 @@ export class MovieCarouselComponent implements OnInit, OnChanges,AfterViewInit  
   changeFocus($event){
     let code=$event.key
     if(code==37 || code==39){
-      console.log($event)
       if(code==39){
         this.next()
       }else{
@@ -213,7 +211,6 @@ export class MovieCarouselComponent implements OnInit, OnChanges,AfterViewInit  
     let next_movie=this.movies.find(movie=> movie.id==id)
     if(index>=0 || index<=this.movies.length-1){
       this.movies[index].active=true
-      console.log(this.movies[index])
       if(code==39){
         this.next()
       }else{
@@ -225,7 +222,6 @@ export class MovieCarouselComponent implements OnInit, OnChanges,AfterViewInit  
   }
 
   shiftFocus($event,index){
-    console.log($event)
     let code=$event.keyCode || $event.which
     if(code==37 || code==39){
       console.log($("#movie-"+index))
